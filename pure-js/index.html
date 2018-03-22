@@ -1,8 +1,104 @@
+<!DOCTYPE html>
 <html>
-    <head>
+<head>
+    <meta name="description" content="cat-animation-3">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    <style>
+        body {
+            background-color: #fff;
+        }
 
-    </head>
-    <body>
+        #clone {
+            position: fixed;
+            bottom: 30px;
+        }
 
-    </body>
+        #clone100 {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+        }
+
+        #stop {
+            position: fixed;
+            bottom: 0;
+            left: 150px;
+        }
+
+        #catCount {
+            font-family: 'Verdana';
+            position: absolute;
+            bottom: 0;
+            left: 200px;
+        }
+    </style>
+
+</head>
+<body>
+<button id="clone100">Clone 100 Cats</button>
+
+<button id="clone">Clone Cat</button>
+
+<button id="stop">Stop!</button>
+<div id="catCount">
+    Number of Cats: <span id="count"></span>
+</div>
+
+<div id="cats"></div>
+<script>
+    // noprotect
+
+    var newId = 0;
+    document.getElementById("clone100").addEventListener("click", function () {
+        for (var i = 0; i < 100; i++) {
+            makeACat();
+        }
+    });
+    document.getElementById("stop").addEventListener("click", function () {
+        for (var i = 1; i < 99999; i++)
+            window.clearInterval(i);
+        document.getElementById('cats').innerHTML = '';
+        newId = 0;
+        document.getElementById('count').innerHTML = 0;
+    });
+
+    document.getElementById("clone").addEventListener("click", function () {
+        makeACat();
+    });
+
+    function makeACat() {
+        newId++;
+        var newCat = document.createElement("img");
+        newCat.setAttribute('src', '../images/Cat-clipart-free-images-5.png');
+        newCat.style.width = '200px';
+        newCat.style.position = 'absolute';
+        newCat.style.top = 0;
+        newCat.style.left = window.innerWidth;
+        newCat.setAttribute('id', "catnumber" + newId);
+        document.getElementById("cats").appendChild(newCat);
+        sineWav("catnumber" + newId);
+        document.getElementById('count').innerHTML = newId;
+    }
+
+    function sineWav(thing) {
+        console.log(thing);
+        var leftPos = window.innerWidth;
+        var topPos = 0;
+        var animated = document.getElementById(thing);
+
+        setInterval(function () {
+            leftPos -= 5;
+            topPos = 200 * (Math.sin(leftPos / 100));
+            //console.log (parseInt(topPos));
+            animated.style.left = leftPos + 'px';
+            animated.style.top = topPos + 'px';
+            if (leftPos < -200) {
+                leftPos = window.innerWidth;
+            }
+        }, 10);
+    }
+</script>
+</body>
 </html>
