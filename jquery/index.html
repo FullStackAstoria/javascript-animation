@@ -1,0 +1,28 @@
+<html>
+<head>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+  <script>
+      $(document).ready(function(){
+          $("#cat").animate({
+              left: "+=400",
+          }, 2000, function() {
+              //animation complete
+          })
+      })
+
+
+  </script>
+    <style>
+        #cat {
+            width: 100px;
+            background-color: blue;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="cat">
+<img src="images/Cat-clipart-free-images-5.png" width="200" />
+</div>
+</body>
+</html>
