@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .wowbox {
+            height:25px;
+            width:25px;
+            position:absolute;
+            border-radius:50%;
+            background: #ea4384;
+            text-align:center;
+            font-family: "Comic Sans MS";
+            font-size: 1em;
+            line-height: 25px;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+    <script src="../libs/jquery.js"></script>
+    <script src="../libs/velocity.js"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            $("button").click(function () {
+                makebox(10);
+            });
+        });
+        function makebox(howMany) {
+            let number = howMany;
+            let color = '#'+Math.floor(Math.random()*16777215).toString(16);
+            let positionx = Math.floor(Math.random()*800).toString() + 'px';
+            let positiony = Math.floor(Math.random()*800).toString() + 'px';
+            var newBox = $('<div style="background:'+color+'" class="wowbox '+number+'">'+number+'</div>');
+                $('#parent').append(newBox);
+                newBox.velocity({left: positionx,top: positiony},1000, function() {
+                    if(number!=0) {
+                        number--;
+
+                        makebox(number);
+                    } else {
+                        //done
+                    }
+                });
+        }
+    </script>
+</head>
+<body>
+
+<button>Start Animation</button>
+<div id="parent">
+</div>
+
+</body>
+</html>
